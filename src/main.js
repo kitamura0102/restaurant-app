@@ -1,24 +1,48 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
+import "./style.css";
+import { menuArray } from "./data";
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+// function addItem() {
+//   const addBtn = document.getElementById("addBtn");
+//   addBtn.addEventListener("click", function (e) {
+//     console.log(e.target);
+//   });
+// }
+function renderTop() {
+  return `<div class="upper-bg">
+          <h1>Raul's Diner</h1>
+          <p>The best burgers and pizzas in town</p>
+        </div>`;
+}
+function renderMenu() {
+  return menuArray.map(function (item) {
+    return `<div class="item-box">
+            <span>${item.emoji}</span>
+            <div class="items">
+              <h2 class="item">${item.name}</h2>
+              <p class="ingredients">${item.ingredients.join(", ")}</p>
+              <h3 class="price">$${item.price}</h3>
+            </div>
+            <button id="addBtn"><i class="fa-solid fa-plus fa-M"></i></button>
+          </div>`;
+  });
+}
+function renderBottom() {
+  return `<div class="order">
+          <h2 class="title-order">Your Order</h2>
+          <div class="order-items">
+            <h2 class="item-order">Pizza</h2>
+            <span class="price-item">$14</span>
+          </div>
+          <div class="total-price">
+            <h2>Total Price:</h2>
+            <span class="price-item-order">$14</span>
+          </div>
+          <button>Complete Order</button>
+        </div>`;
+}
 
-setupCounter(document.querySelector('#counter'))
+function render() {
+  return renderTop() + renderMenu().join("") + renderBottom();
+}
+
+document.getElementById("container").innerHTML = render();
