@@ -99,6 +99,13 @@ h1 {
   align-items: center;
   padding: 5px 0;
 }
+
+.quantity{
+  position: relative;
+  right: 35%;
+  z-index: 1;
+  font-size:1rem ;
+}
 .order button {
   height: 60px;
   background-color: #16db99;

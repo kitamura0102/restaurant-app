@@ -18,6 +18,11 @@ document.addEventListener('click', function(e){
 function renderMenu() {
   let feedHtml = "";
 
+
+  if(cart.length > 0){
+     renderBodyBottom()
+  }
+
   menuArray.map(function (item) {
     feedHtml += `
     <div class="item-box">
@@ -44,11 +49,14 @@ function addItems(itemsId){
     cart.push(targetItemObj.price)
     order.push(renderItemsBottom(targetItemObj)) 
     render() 
-    renderBodyBottom()
+    
+    renderMenu()
   }
   
   
 }
+
+
 
 
 //sum the cart in order to get the total of it
@@ -60,11 +68,13 @@ function sumCart(){
 
 //render the items in the cart in order to process the payment
 function renderItemsBottom(items){
+  let quantity = 0;
   let buttomRendered = '';
   if(cart.length > 0){
     buttomRendered =  `
     <div class="order-items">
       <h2 class="item-order">${items.name}</h2>
+      <span class="quantity">x ${quantity}</span>
       <span class="price-item">$${items.price}</span>
     </div>
     `;
@@ -90,14 +100,22 @@ function renderBodyBottom() {
   
     
   
-return buttomRendered
+  
+    return buttomRendered
+  
+
 
   
 }
 //Render
 function render() {
 
-  document.getElementById("container").innerHTML =  renderMenu() + renderBodyBottom()
+  if(cart.length > 0){
+    document.getElementById("container").innerHTML =  renderMenu() + renderBodyBottom()
+  }else{
+    document.getElementById("container").innerHTML =  renderMenu()
+  }
+  
  
 }
 
