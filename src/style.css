@@ -101,9 +101,8 @@ h1 {
 }
 
 .quantity{
-  position: relative;
-  right: 35%;
-  z-index: 1;
+  margin-left: 10px;
+  margin-right: auto;
   font-size:1rem ;
 }
 .order button {

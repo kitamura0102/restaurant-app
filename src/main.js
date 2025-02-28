@@ -1,29 +1,19 @@
 import "./style.css";
 import { menuArray } from "./data";
 
-const cart = []
-let order = []
+const order = [];
 
-document.addEventListener('click', function(e){
-  if(e.target.dataset.add){
-    addItems(e.target.dataset.add)
+document.addEventListener("click", function (e) {
+  if (e.target.dataset.add) {
+    addItems(e.target.dataset.add);
   }
-})
+});
 
-
-
-
-
-//Render the menu
+// Función para renderizar el menú
 function renderMenu() {
   let feedHtml = "";
 
-
-  if(cart.length > 0){
-     renderBodyBottom()
-  }
-
-  menuArray.map(function (item) {
+  menuArray.forEach(function (item) {
     feedHtml += `
     <div class="item-box">
             <span>${item.emoji}</span>
@@ -32,92 +22,79 @@ function renderMenu() {
               <p class="ingredients">${item.ingredients.join(", ")}</p>
               <h3 class="price">$${item.price}</h3>
             </div>
-            <button class="add-btn" id="addBtn" data-add='${item.uuid}'><i class="fa-solid fa-plus fa-M "></i></button>
+            <button class="add-btn" data-add="${item.uuid}">
+              <i class="fa-solid fa-plus fa-M"></i>
+            </button>
     </div>
           `;
   });
   return feedHtml;
 }
-//Every time an item is clicked, do something / identify the item clicked
-function addItems(itemsId){
-  
-  const targetItemObj = menuArray.filter(function(item){
-    return item.uuid === itemsId
-  })[0]
 
-  if(targetItemObj){
-    cart.push(targetItemObj.price)
-    order.push(renderItemsBottom(targetItemObj)) 
-    render() 
-    
-    renderMenu()
+// Función para agregar items al carrito
+function addItems(itemsId) {
+  // Buscar el objeto en menuArray
+  const targetItemObj = menuArray.find((item) => item.uuid === itemsId);
+
+  if (targetItemObj) {
+    // Buscar si el item ya está en order
+    let existingItem = order.find((item) => item.uuid === itemsId);
+
+    if (existingItem) {
+      // Si ya existe, incrementar su cantidad
+      existingItem.quantity++;
+    } else {
+      // Si no existe, agregarlo con quantity: 1
+      order.push({ ...targetItemObj, quantity: 1 });
+    }
+
+    // Renderizar nuevamente
+    render();
   }
-  
-  
 }
 
-
-
-
-//sum the cart in order to get the total of it
-function sumCart(){
-  let price = 0;
-  let totalPrice = cart.reduce((accumulator, currentValue)=> accumulator + currentValue, price,)
-  return totalPrice
-}
-
-//render the items in the cart in order to process the payment
-function renderItemsBottom(items){
-  let quantity = 0;
-  let buttomRendered = '';
-  if(cart.length > 0){
-    buttomRendered =  `
+// Renderizar los items en el carrito
+function renderItemsBottom() {
+  return order
+    .map(
+      (item) => `
     <div class="order-items">
-      <h2 class="item-order">${items.name}</h2>
-      <span class="quantity">x ${quantity}</span>
-      <span class="price-item">$${items.price}</span>
+      <h2 class="item-order">${item.name}</h2>
+      <span class="quantity">x ${item.quantity}</span>
+      <span class="price-item">$${item.price * item.quantity}</span>
     </div>
-    `;
-  }
-    
-return buttomRendered
-
+  `
+    )
+    .join("");
 }
 
-//render the main body
+// Renderizar el resumen del pedido
 function renderBodyBottom() {
-  let buttomRendered = `<div class="order">
-    <h2 class="title-order">Your Order Details</h2>
-    <div class="list-of-items">
-    ${order.join('')}
+  return `
+    <div class="order">
+      <h2 class="title-order">Your Order Details</h2>
+      <div class="list-of-items">
+        ${renderItemsBottom()}
+      </div>
+      <div class="total-price">
+        <h2>Total Price:</h2>
+        <span class="price-item-order">$${sumCart()}</span>
+      </div>
+      <button>Complete Order</button>
     </div>
-    <div class="total-price">
-      <h2>Total Price:</h2>
-      <span class="price-item-order">$${sumCart()}</span>
-    </div>
-    <button>Complete Order</button>
-  </div>`
-  
-    
-  
-  
-    return buttomRendered
-  
-
-
-  
+  `;
 }
-//Render
+
+// Función para calcular el total del carrito
+function sumCart() {
+  return order.reduce((total, item) => total + item.price * item.quantity, 0);
+}
+
+// Función principal de renderizado
 function render() {
-
-  if(cart.length > 0){
-    document.getElementById("container").innerHTML =  renderMenu() + renderBodyBottom()
-  }else{
-    document.getElementById("container").innerHTML =  renderMenu()
-  }
-  
- 
+  document.getElementById("container").innerHTML =
+    renderMenu() + (order.length > 0 ? renderBodyBottom() : "");
 }
 
-
-render()
+// Ejecutar la primera renderización
+render();

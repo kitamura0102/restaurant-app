@@ -6,7 +6,8 @@ export const menuArray = [
     ingredients: ["pepperoni", "mushrom", "mozarella"],
     price: 14,
     emoji: "🍕",
-    uuid: uuidv4()
+    uuid: uuidv4(),
+    
   },
   {
     name: "Hamburger",
@@ -14,6 +15,7 @@ export const menuArray = [
     price: 12,
     emoji: "🍔",
     uuid: uuidv4(),
+    
   },
   {
     name: "Beer",
@@ -21,5 +23,6 @@ export const menuArray = [
     price: 6,
     emoji: "🍺",
     uuid: uuidv4(),
+    
   },
 ];
