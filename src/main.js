@@ -2,7 +2,7 @@ import "./style.css";
 import { menuArray } from "./data";
 
 const order = [];
-
+const minusBtn = ''
 document.addEventListener("click", function (e) {
   if (e.target.dataset.add) {
     addItems(e.target.dataset.add);
@@ -43,6 +43,7 @@ function addItems(itemsId) {
     if (existingItem) {
       // Si ya existe, incrementar su cantidad
       existingItem.quantity++;
+
     } else {
       // Si no existe, agregarlo con quantity: 1
       order.push({ ...targetItemObj, quantity: 1 });
