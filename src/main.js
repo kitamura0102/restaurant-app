@@ -2,10 +2,13 @@ import "./style.css";
 import { menuArray } from "./data";
 
 const order = [];
-const minusBtn = ''
+
 document.addEventListener("click", function (e) {
-  if (e.target.dataset.add) {
+  if(e.target.dataset.add) {
     addItems(e.target.dataset.add);
+  }else if(e.target.dataset.minus){
+    deleteItems(e.target.dataset.minus)
+
   }
 });
 
@@ -22,15 +25,36 @@ function renderMenu() {
               <p class="ingredients">${item.ingredients.join(", ")}</p>
               <h3 class="price">$${item.price}</h3>
             </div>
+            <div class="interaction-btn">
+            <button class="minus-btn" data-minus="${item.uuid}">
+              <i class="fa-solid fa-minus" style="color: #d81313;"></i>
+            </button>
             <button class="add-btn" data-add="${item.uuid}">
               <i class="fa-solid fa-plus fa-M"></i>
-            </button>
+            </button></div>
+            
     </div>
           `;
   });
   return feedHtml;
 }
+function deleteItems(itemsId){
+  const targetItemObj = menuArray.find((item) => item.uuid === itemsId);
 
+  if(targetItemObj){
+    let existingItem = order.find((item) => item.uuid === itemsId);
+
+    console.log(existingItem)
+    if(existingItem.quantity > 0){
+      existingItem.quantity--
+    }else{
+      existingItem = ''
+    }
+
+
+    render();
+  }
+}
 // Función para agregar items al carrito
 function addItems(itemsId) {
   // Buscar el objeto en menuArray

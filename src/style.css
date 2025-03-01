@@ -57,6 +57,7 @@ h1 {
 }
 .ingredients{
   font-size: .8rem;
+  
 }
 .price{
   font-size: .9rem;
@@ -76,6 +77,13 @@ h1 {
   cursor: pointer;
   margin-left: auto;
   user-select: none;
+}
+
+.interaction-btn{
+  display: flex;
+  justify-content: space-evenly;
+  width: 40%;
+  margin-left: auto;
 }
 .item-box h2,
 .item-box h3,
