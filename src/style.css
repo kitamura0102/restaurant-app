@@ -30,6 +30,7 @@ h1 {
   display: flex;
   flex-direction: column;
   border: none;
+  justify-content: center;
 }
 .upper-bg {
   background: url("/burger-background.jpg");
@@ -138,6 +139,65 @@ h1 {
 }
 .order button:active {
   background-color: #16db80;
+}
+
+.complete-order-body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  max-width: 400px;
+  width: 90%;
+  height:450px;
+  box-shadow: #D1D5DB 0 0 10px 15px;
+  background-color: #fff;
+  margin: 0 auto;
+  position: fixed;
+  z-index: 9999;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+}
+.complete-order-body h3{
+  font-size: 1.5rem;
+}
+.form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+ 
+  width: 90%;
+  height: 400px;
+  
+  
+}
+.form input{
+  height: 60px;
+  width: 90%;
+  font-size: 1rem;
+  caret-color:transparent ;
+  margin: 0;
+}
+.form input::placeholder{
+  font-size: 1rem;
+  padding-left: 10px;
+}
+
+.form-btn{
+
+    height: 80px;
+    background-color: #16db99;
+    border: none;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    user-select: none;
+    width: 83%;
+    background-color: #16db80;
+    margin-bottom: 20px;
 }
 .hidden{
   display: none;
