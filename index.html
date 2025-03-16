@@ -18,14 +18,16 @@
       </div>
 
       <div class="container" id="container"></div>
-      <div class="complete-order-body hidden modal" id="completeOrder">
+      
+      <div class="complete-order-body hidden modal">
         <h3>Enter Card Details</h3>
         <form action="form" class="form">
-          <input type="text" placeholder="Enter your name" id="name" required>
-          <input type="text" placeholder="Enter card number" id="card-Number" required>
-          <input type="text" placeholder="Enter CVV" id="cvv" required>
+          <input type="text" placeholder="Enter your name" id="name" >
+          <input type="number" placeholder="Enter card number" id="card-Number" >
+          <input type="number" placeholder="Enter CVV" id="cvv" >
+                  <button type="submit" class="form-btn" id="form">Pay</button>
+
         </form>
-        <button type="submit" class="form-btn" id="form">Pay</button>
       </div>
     </div>
     <script type="module" src="/src/main.js"></script>

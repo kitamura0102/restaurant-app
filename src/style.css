@@ -188,7 +188,7 @@ h1 {
 
 .form-btn{
 
-    height: 80px;
+    height: 70px;
     background-color: #16db99;
     border: none;
     color: #fff;
@@ -196,8 +196,17 @@ h1 {
     cursor: pointer;
     user-select: none;
     width: 83%;
-    background-color: #16db80;
     margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.order-finished{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  color: #065F46;
+  font-size: 1.2rem;
 }
 .hidden{
   display: none;
